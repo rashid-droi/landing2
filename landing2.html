@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SELECT | UAE Student Lifecycle Management</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mulish', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8fafc;
+        }
+
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(0, 48, 87, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(4, 30, 66, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00968F;
+            border-radius: 10px;
+        }
+
+        .card-3d {
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .card-3d:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px -15px rgba(0, 48, 87, 0.15);
+            border-color: rgba(0, 150, 143, 0.3);
+            z-index: 10;
+        }
+
+        .gradient-gold {
+            background: linear-gradient(135deg, #FFCD00, #D29F13);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-gradient-gold {
+            background: linear-gradient(135deg, #FFCD00, #D29F13);
+        }
+
+        .bg-blob-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(0, 150, 143, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 205, 0, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .select-mesh-bg {
+            background-color: #041E42;
+            background-image:
+                radial-gradient(at 0% 100%, rgba(255, 205, 0, 0.85) 0px, transparent 55%),
+                radial-gradient(at 100% 0%, rgba(0, 150, 143, 0.85) 0px, transparent 65%),
+                radial-gradient(at 0% 0%, rgba(4, 30, 66, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 48, 87, 1) 0px, transparent 50%);
+        }
+
+
+        .dark .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+        }
+
+        .dark .light-icon {
+            display: none;
+        }
+
+        html:not(.dark) .dark-icon {
+            display: none;
+        }
+
+        .company-logo {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Essential for JPG/PNG logos on dark backgrounds to look transparent */
+        .logo-on-dark {
+            filter: invert(1) brightness(2);
+            mix-blend-mode: screen;
+        }
+
+        .dark .company-logo {
+            filter: invert(1) brightness(2) !important;
+            mix-blend-mode: screen !important;
+        }
+
+        /* Prevent axis wobble and jitter */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .scroll-container {
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'prussian': '#003057',
+                        'oxford': '#041E42',
+                        'viridian': '#00968F',
+                        'cyber': '#FFCD00',
+                        'lemon': '#D29F13',
+                        'sinopia': '#9D432C',
+                        'champagne': '#F7E6C4'
+                    },
+                    fontFamily: {
+                        'mulish': ['Mulish', 'sans-serif'],
+                        'philosopher': ['Philosopher', 'sans-serif'],
+                        'outfit': ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body
+    class="text-gray-800 dark:text-slate-100 bg-[#f8fafc] dark:bg-[#0B1120] transition-colors duration-300 antialiased relative custom-scrollbar">
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu-overlay"
+        class="fixed inset-0 select-mesh-bg z-50 transform translate-x-full transition-transform duration-500 ease-in-out lg:hidden">
+        <div class="flex justify-between items-center p-8">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo.png" alt="SELECT Logo" class="company-logo logo-on-dark">
+            </div>
+            <button id="close-menu-btn"
+                class="text-white text-3xl hover:text-cyber transition transform hover:rotate-90"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <div
+            class="flex flex-col items-center justify-center space-y-10 text-white text-xl font-bold h-full -mt-20 font-philosopher tracking-wide">
+            <a href="#about" class="hover:text-cyber transition">About SELECT</a>
+            <a href="#model" class="hover:text-cyber transition">Lifecycle Model</a>
+            <a href="#services" class="hover:text-cyber transition">Services</a>
+            <a href="#partnership" class="hover:text-cyber transition">Partnership Models</a>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header
+        class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-100 dark:border-slate-800 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 py-5 flex justify-between items-center">
+            <div class="logo" data-aos="fade-down">
+                <a href="#" class="flex items-center gap-3 outline-none">
+                    <img src="assets/logo.png" alt="SELECT Logo" class="company-logo">
+                </a>
+            </div>
+            <nav
+                class="hidden lg:flex items-center space-x-10 text-sm font-bold text-prussian dark:text-white uppercase tracking-wider" data-aos="fade-down" data-aos-delay="100">
+                <a href="#about" class="hover:text-viridian transition-all hover:-translate-y-1">About Us</a>
+                <a href="#model" class="hover:text-viridian transition-all hover:-translate-y-1">Lifecycle Model</a>
+                <a href="#services" class="hover:text-viridian transition-all hover:-translate-y-1">Services</a>
+                <a href="#partnership" class="hover:text-viridian transition-all hover:-translate-y-1">Partnerships</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-6 text-prussian dark:text-white dark:text-white" data-aos="fade-down" data-aos-delay="200">
+                <button id="theme-toggle"
+                    class="text-gray-500 dark:text-slate-400 dark:text-cyber hover:text-viridian transition text-2xl outline-none">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </button>
+                <a href="#contact"
+                    class="text-sm font-bold px-8 py-3 rounded-full bg-prussian text-white hover:bg-oxford transition-all shadow-md">Partner
+                    With Us</a>
+            </div>
+
+
+            <div class="lg:hidden flex items-center space-x-5">
+                <button id="theme-toggle-mobile"
+                    class="text-gray-500 dark:text-slate-400 dark:text-cyber hover:text-viridian transition text-xl outline-none">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </button>
+                <button id="mobile-menu-btn"
+                    class="text-2xl text-prussian dark:text-white dark:text-white focus:outline-none hover:text-viridian"><i
+                        class="fas fa-bars"></i></button>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+        <!-- Premium Hero Section -->
+        <section class="relative py-24 lg:py-40 flex items-center min-h-[90vh] overflow-hidden select-mesh-bg">
+            <!-- Background Image overlay -->
+            <div
+                class="absolute inset-0 bg-[url('assets/corporate_consultants.png')] bg-cover bg-center opacity-10 mix-blend-overlay">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-2/3" data-aos="fade-up" data-aos-duration="1000">
+                    <div
+                        class="inline-flex items-center gap-3 mb-8 px-4 py-2 rounded-full border border-cyber/30 bg-cyber/10 backdrop-blur-sm text-cyber font-bold tracking-widest uppercase text-xs">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyber"></span>
+                        </span>
+                        UAE Scholarship Excellence
+                    </div>
+                    <h1
+                        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-philosopher leading-[1.1] mb-6 text-white drop-shadow-2xl">
+                        UAE Student Lifecycle <span class="gradient-gold">Management</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-10 font-light max-w-2xl leading-relaxed font-outfit">
+                        A comprehensive end-to-end Partnership Model safeguarding UAE Scholarship programmes from
+                        selection to employment.
+                    </p>
+                    <div class="flex flex-wrap gap-5">
+                        <a href="#model"
+                            class="inline-flex items-center justify-center bg-gradient-gold text-prussian font-black px-10 py-4 rounded-full hover:shadow-[0_0_30px_rgba(255,205,0,0.4)] transition-all transform hover:-translate-y-1">
+                            Explore The Model <i class="fas fa-arrow-right ml-3"></i>
+                        </a>
+                        <a href="#about"
+                            class="inline-flex items-center justify-center bg-transparent border border-white/30 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 dark:bg-slate-800/50 transition-all">
+                            Why SELECT?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Floating Data Card -->
+                <div class="lg:w-1/3 w-full" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
+                    <div class="glass-dark rounded-3xl p-6 md:p-8 relative overflow-hidden group">
+                        <div
+                            class="absolute -right-10 -top-10 w-40 h-40 bg-viridian/40 rounded-full blur-3xl group-hover:bg-cyber/40 transition-all duration-700">
+                        </div>
+                        <i class="fas fa-globe text-4xl text-cyber mb-6 relative z-10"></i>
+                        <h3 class="text-5xl font-outfit font-black text-white mb-2 relative z-10">8.5m</h3>
+                        <p
+                            class="text-sm text-gray-300 font-medium uppercase tracking-widest leading-relaxed relative z-10 border-b border-white/10 pb-6 mb-6">
+                            Estimated international students globally by 2030. The GCC is a key driver.
+                        </p>
+                        <h3 class="text-4xl font-outfit font-black text-white mb-2 relative z-10">18,600+</h3>
+                        <p
+                            class="text-sm text-gray-300 font-medium uppercase tracking-widest leading-relaxed relative z-10">
+                            UAE students studying abroad in 2022 (51% increase since 2018).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Message from CEO -->
+        <section id="leadership" class="py-24 bg-white dark:bg-slate-900 relative ">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl card-3d" data-aos="fade-right">
+                    <img src="assets/natalie brown.png" alt="Natalie Brown"
+                        class="w-full h-[500px] object-cover object-top" />
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#041E42] via-[#041E42]/80 to-transparent p-8 pt-20">
+                        <h3 class="text-white text-3xl font-philosopher font-bold border-l-4 border-cyber pl-4">Natalie
+                            Brown</h3>
+                        <p class="text-cyber text-sm font-bold uppercase tracking-widest pl-5 mt-1">Chief Executive
+                            Officer</p>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <span class="text-viridian font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Leadership
+                        Vision</span>
+                    <h2 class="text-4xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">
+                        Guiding the Next Generation</h2>
+                    <p class="text-lg text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        "For two decades, SELECT has aligned educational tracking with the UAE’s ambitious national
+                        agenda. The Lifecycle Model isn't just about passing exams—it's about returning to the UAE as a
+                        resilient, career-ready professional."
+                    </p>
+                    <p
+                        class="text-lg text-gray-600 dark:text-slate-300 leading-relaxed font-bold border-l-4 border-cyber pl-6 italic">
+                        "When sponsors entrust us with their global scholars, we take accountability for the entire
+                        journey. From departure to graduation, no student is left behind."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & The Challenge Section -->
+        <section id="about"
+            class="py-24 bg-gray-50 dark:bg-slate-950 relative border-t border-gray-100 dark:border-slate-800">
+            <div class="bg-blob-1"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                    <div data-aos="fade-right">
+                        <span class="text-viridian font-bold tracking-[0.2em] uppercase text-sm mb-4 block">About
+                            SELECT</span>
+                        <h2 class="text-4xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">
+                            Specialists in UAE student success</h2>
+                        <p class="text-lg text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
+                            SELECT Training and Management Consultancy LLC is a UAE-based organisation supporting UAE
+                            students studying abroad. With a deep understanding of UAE culture and national priorities,
+                            we partner with sponsors, families, and students throughout the journey.
+                        </p>
+                        <p
+                            class="text-lg text-gray-600 dark:text-slate-300 leading-relaxed border-l-4 border-cyber pl-6 italic">
+                            Our Arabic-speaking counsellors and academic advisors combine expertise in education
+                            management, psychometric assessment, cultural intelligence, and workforce readiness.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-left">
+                        <div
+                            class="glass-panel p-8 rounded-2xl card-3d border border-gray-100 dark:border-slate-800 shadow-xl">
+                            <i class="fas fa-exclamation-triangle text-3xl text-sinopia mb-4"></i>
+                            <h4 class="font-black text-3xl text-prussian dark:text-white mb-2">2×</h4>
+                            <p class="text-sm text-gray-600 dark:text-slate-300 font-bold uppercase tracking-wider">
+                                Increase</p>
+                            <p class="text-sm text-gray-500 dark:text-slate-400 mt-2">The prevalence of anxiety among
+                                international students doubled between 2015 and 2024.</p>
+                        </div>
+                        <div
+                            class="glass-panel p-8 rounded-2xl card-3d border border-gray-100 dark:border-slate-800 shadow-xl mt-0 md:mt-12">
+                            <i class="fas fa-university text-3xl text-viridian mb-4"></i>
+                            <h4 class="font-black text-3xl text-prussian dark:text-white mb-2">54%</h4>
+                            <p class="text-sm text-gray-600 dark:text-slate-300 font-bold uppercase tracking-wider">
+                                Female Enrolments</p>
+                            <p class="text-sm text-gray-500 dark:text-slate-400 mt-2">Of new UAE higher education
+                                enrolments in 2024–25 were female.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-oxford rounded-[3rem] p-10 md:p-16 text-white shadow-2xl relative overflow-hidden"
+                    data-aos="zoom-in">
+                    <div class="absolute right-0 bottom-0 w-64 h-64 bg-cyber opacity-10 rounded-full blur-3xl z-0"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                        <div class="md:w-3/5 text-left">
+                            <i class="fas fa-shield-alt text-5xl text-cyber mb-6"></i>
+                            <h3 class="text-3xl md:text-4xl font-philosopher mb-6">Unsupported students face severe risks</h3>
+                            <p class="text-lg text-gray-300 font-light leading-relaxed">
+                                UAE government scholarships provide immense value, yet nearly half of self-funded Emirati
+                                students are clustered in just two universities. The risk of unguided choices, academic
+                                underperformance, and emotional burnout is deeply prominent without structured care.
+                            </p>
+                        </div>
+                        <div class="md:w-2/5 p-2 w-full">
+                            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/5 relative group">
+                                <img src="assets/blog_anxiety.png" alt="Student Risks" class="w-full h-64 md:h-80 object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-prussian/80 to-transparent mix-blend-multiply opacity-50"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 7-Stage Lifecycle Model -->
+        <section id="model"
+            class="py-24 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden border-t border-gray-100 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                    <span class="text-viridian font-bold tracking-[0.2em] uppercase text-sm mb-4 block">End-To-End
+                        Protection</span>
+                    <h2 class="text-4xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">The
+                        SELECT Lifecycle Model</h2>
+                    <p class="text-lg text-gray-600 dark:text-slate-300 max-w-3xl mx-auto font-light">
+                        Student success is engineered. From candidate identification to returning as a professional in
+                        the UAE workforce, SELECT is present, accountable, and engaged across these 7 integrated stages.
+                    </p>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto">
+                    <!-- Vertical Line -->
+                    <div
+                        class="absolute top-0 bottom-0 left-[26px] md:left-1/2 w-1 bg-gradient-to-b from-viridian to-cyber opacity-30 transform md:-translate-x-1/2 rounded-full">
+                    </div>
+
+                    <!-- Stage 1 (Right on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <!-- Mobile Dot -->
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+
+                        <!-- Desktop Elements -->
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+
+                        <!-- Card -->
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pl-8">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative overflow-hidden group/stage"
+                                data-aos="fade-left">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/psychometric_screening.png')] bg-cover bg-[center_top_-20px] mix-blend-overlay opacity-30 sm:opacity-50 group-hover/stage:opacity-70 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-cyber font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:right-auto md:-left-6 opacity-20 font-outfit drop-shadow-md">01</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md">
+                                        Psychometric Screening</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium mb-4 text-sm leading-relaxed drop-shadow-md">
+                                        Identifying candidates with academic capability, psychological resilience, and
+                                        personal readiness. Protects sponsor investment from day one.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-brain mr-2"></i>Capability</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-heartbeat mr-2"></i>Resilience</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-user-check mr-2"></i>Readiness</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2 (Left on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-viridian border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+
+                        <!-- Card (Always first in DOM, naturally flows to top in flex-col on mobile, or left in flex-row on desktop) -->
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pr-8 md:text-right">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative overflow-hidden group/stage"
+                                data-aos="fade-right">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/pre_departure.png')] bg-cover bg-center mix-blend-overlay opacity-30 sm:opacity-50 group-hover/stage:opacity-70 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-viridian font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:-right-6 opacity-20 font-outfit drop-shadow-md">02</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md">
+                                        Pre-Departure Preparation</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium mb-4 text-sm leading-relaxed drop-shadow-md">
+                                        Structured prep reducing the risk of early dropout. Covers Cultural
+                                        Intelligence, Academic Prep, Practical Life Skills, Emotional Readiness, and
+                                        Family Briefings.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start md:justify-end mt-4">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-passport mr-2"></i>Visas</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-home mr-2"></i>Housing</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-wallet mr-2"></i>Budgeting</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-users mr-2"></i>Parents</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Elements -->
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-viridian border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- Stage 3 (Right on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-prussian border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-prussian border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pl-8">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative overflow-hidden group/stage"
+                                data-aos="fade-left">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/arrival_orientation.png')] bg-cover bg-center mix-blend-overlay opacity-40 sm:opacity-60 group-hover/stage:opacity-80 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-prussian dark:text-white font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:right-auto md:-left-6 opacity-20 font-outfit drop-shadow-md">03</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md bg-white/40 dark:bg-black/40 inline-flex px-3 rounded-lg backdrop-blur-sm -ml-3">
+                                        Arrival & Orientation</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium text-sm leading-relaxed drop-shadow-md pt-2 mb-4">
+                                        The foremost vulnerable weeks. From airport collection to university enrolment,
+                                        our in-country support team ensures a warm, structured welcome.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-plane-arrival mr-2"></i>Arrival</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-map-marked-alt mr-2"></i>Orientation</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-id-card mr-2"></i>Enrolment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4 (Left on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pr-8 md:text-right">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative flex flex-col overflow-hidden group/stage"
+                                data-aos="fade-right">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/monthly_counselling.png')] bg-cover bg-center mix-blend-overlay opacity-40 sm:opacity-60 group-hover/stage:opacity-80 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10 flex flex-col h-full">
+                                    <span
+                                        class="text-cyber font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:-right-6 opacity-30 font-outfit drop-shadow-md">04</span>
+                                    <div
+                                        class="inline-flex bg-sinopia/20 text-sinopia rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold mb-3 md:float-right md:ml-auto block w-max backdrop-blur-sm drop-shadow-md">
+                                        <i class="fas fa-star mr-1"></i> 91% Satisfaction</div>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-1 md:pt-0 drop-shadow-md">
+                                        Monthly Counselling</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium text-sm leading-relaxed drop-shadow-md mt-auto mb-4">
+                                        Early intervention is critical. Structured sessions with qualified
+                                        Arabic-speaking counsellors to maintain wellbeing and prevent dropout.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start md:justify-end mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-calendar-check mr-2"></i>Monthly</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-smile mr-2"></i>Wellbeing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- Stage 5 (Right on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-viridian border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-viridian border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pl-8">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative overflow-hidden group/stage"
+                                data-aos="fade-left">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/cultural_intelligence.png')] bg-cover bg-center mix-blend-overlay opacity-40 sm:opacity-60 group-hover/stage:opacity-80 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-viridian font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:right-auto md:-left-6 opacity-20 font-outfit drop-shadow-md">05</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md">
+                                        Cultural Intelligence</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium text-sm leading-relaxed drop-shadow-md mb-4">
+                                        Navigating Western social norms, overcoming language barriers, planning for
+                                        religious/dietary needs, and managing family separation support via
+                                        Arabic-speaking pros.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-comments mr-2"></i>Language</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-utensils mr-2"></i>Dietary</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-viridian bg-viridian/10 border border-viridian/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-praying-hands mr-2"></i>Religious</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 6 (Left on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 md:mb-16 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-prussian border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pr-8 md:text-right">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d relative overflow-hidden group/stage"
+                                data-aos="fade-right">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/student_advisory.png')] bg-cover bg-[center_top] mix-blend-overlay opacity-40 sm:opacity-60 group-hover/stage:opacity-80 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-prussian dark:text-white font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:-right-6 opacity-20 font-outfit drop-shadow-md">06</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md bg-white/40 dark:bg-black/40 inline-flex px-3 rounded-lg backdrop-blur-sm -mr-3 md:float-right md:ml-auto md:w-max">
+                                        Academic Management</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium text-sm leading-relaxed drop-shadow-md clear-both pt-2 mb-4">
+                                        Holistic safety net. Progress monitoring, study skills coaching, housing
+                                        assistance, financial management, healthcare navigation, and internship
+                                        facilitation.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start md:justify-end mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-chart-line mr-2"></i>Progress</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-book-reader mr-2"></i>Study</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-prussian dark:text-gray-300 bg-prussian/10 dark:bg-gray-700 border border-prussian/20 dark:border-gray-600 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-file-medical mr-2"></i>Health</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-prussian border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- Stage 7 (Right on Desktop) -->
+                    <div class="relative flex flex-col md:flex-row w-full mb-12 group">
+                        <div
+                            class="md:hidden absolute top-8 left-[28px] w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:flex justify-center items-start pt-8 md:w-2/12 z-10">
+                            <div
+                                class="w-6 h-6 rounded-full bg-cyber border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300">
+                            </div>
+                        </div>
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0 pr-4 lg:pl-8">
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl w-full shadow-lg border border-gray-200 dark:border-slate-700 card-3d bg-gradient-to-br from-white to-champagne/30 relative overflow-hidden group/stage"
+                                data-aos="fade-left">
+                                <div
+                                    class="absolute inset-0 bg-[url('assets/emirati_student_success.png')] bg-cover bg-[center_top] mix-blend-overlay opacity-40 sm:opacity-60 group-hover/stage:opacity-80 transition-opacity duration-500">
+                                </div>
+                                <div class="relative z-10">
+                                    <span
+                                        class="text-cyber font-black text-4xl md:text-5xl absolute -top-4 md:-top-6 right-6 md:right-auto md:-left-6 opacity-30 font-outfit drop-shadow-md">07</span>
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold font-philosopher text-prussian dark:text-white mb-3 pt-2 md:pt-0 drop-shadow-md bg-white/40 dark:bg-black/40 inline-flex px-3 rounded-lg backdrop-blur-sm -ml-3">
+                                        Return & Graduation</h3>
+                                    <p
+                                        class="text-gray-800 dark:text-slate-200 font-medium text-sm leading-relaxed drop-shadow-md pt-2 mb-4">
+                                        Graduation is the beginning. Bridging the gap from international achievement to
+                                        becoming a confident, career-ready professional for the UAE workforce.</p>
+                                    <div class="flex flex-wrap gap-2 justify-start mt-2">
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-graduation-cap mr-2"></i>Graduation</span>
+                                        <span
+                                            class="inline-flex items-center text-[10px] sm:text-xs font-bold text-cyber bg-cyber/10 border border-cyber/20 px-3 py-1.5 rounded-lg backdrop-blur-sm drop-shadow-sm"><i
+                                                class="fas fa-briefcase mr-2"></i>Career Ready</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Services Section -->
+        <section id="services" class="py-24 bg-prussian text-white relative">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="mb-16" data-aos="fade-up">
+                    <span class="text-cyber font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Holistic
+                        Integration</span>
+                    <h2 class="text-4xl md:text-5xl font-bold font-philosopher mb-6">Built To Protect & Expand</h2>
+                </div>
+
+                <style>
+                    .feature-card {
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .feature-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 50%;
+                        height: 100%;
+                        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+                        transform: skewX(-25deg);
+                        transition: all 0.7s;
+                    }
+
+                    .feature-card:hover::before {
+                        left: 200%;
+                    }
+
+                    .dark .glass-panel {
+                        background: rgba(30, 41, 59, 0.7);
+                        border-color: rgba(255, 255, 255, 0.1);
+                        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+                    }
+
+                    .dark .light-icon {
+                        display: none;
+                    }
+
+                    html:not(.dark) .dark-icon {
+                        display: none;
+                    }
+                </style>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Additional Services -->
+                    <div class="feature-card glass-dark p-6 md:p-8 rounded-[2rem] lg:col-span-2 shadow-2xl card-3d"
+                        data-aos="fade-up">
+                        <div class="flex flex-col md:flex-row gap-8 items-center h-full">
+                            <div class="md:w-3/5">
+                                <i class="fas fa-boxes text-3xl text-cyber mb-6"></i>
+                                <h3 class="text-xl md:text-2xl font-philosopher font-bold mb-4">Arranging The Essentials</h3>
+                                <p class="text-gray-300 text-sm mb-6 max-w-xl">We remove administrative burdens so students
+                                    focus on their studies. Extensive services ensuring every detail is managed carefully.</p>
+                                <div
+                                    class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-bold text-gray-200 uppercase tracking-wider">
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-university text-viridian mr-2 text-base w-4"></i> Univ Selection</span>
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-money-bill text-viridian mr-2 text-base w-4"></i> Scholarships</span>
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-passport text-viridian mr-2 text-base w-4"></i> Visa Support</span>
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-plane text-viridian mr-2 text-base w-4"></i> Travel & Insur.</span>
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-home text-viridian mr-2 text-base w-4"></i> Accommodation</span>
+                                    <span class="bg-white/5 p-3 rounded-lg flex items-center"><i class="fas fa-mobile-alt text-viridian mr-2 text-base w-4"></i> Banking / SIM</span>
+                                </div>
+                            </div>
+                            <div class="md:w-2/5 w-full h-[250px] md:h-full relative rounded-2xl overflow-hidden shadow-lg border border-white/10 group mt-6 md:mt-0">
+                                <img src="assets/arrival_orientation.png" alt="Arranging the Essentials" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-prussian/40 to-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strategic University Selection -->
+                    <div class="feature-card bg-viridian text-white p-8 rounded-[2rem] shadow-2xl card-3d relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/strategic_selection.png')] bg-cover bg-center mix-blend-multiply opacity-50">
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-bullseye text-3xl mb-6"></i>
+                            <h3 class="text-2xl font-philosopher font-bold mb-4">Strategic Selection</h3>
+                            <p class="text-sm font-light leading-relaxed drop-shadow-md">
+                                Every student placement is aligned to the UAE's national workforce agenda. We review
+                                global university performance tailored to UAE priority sectors for maximum ROI.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 24/7 Crisis Response -->
+                    <div class="feature-card bg-sinopia text-white p-8 rounded-[2rem] shadow-2xl card-3d relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/crisis_response.png')] bg-cover bg-center mix-blend-multiply opacity-40">
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-phone-alt text-3xl mb-6"></i>
+                            <h3 class="text-2xl font-philosopher font-bold mb-4">24/7 Crisis Response</h3>
+                            <p class="text-sm font-light leading-relaxed mb-4 drop-shadow-md">
+                                Direct, round-the-clock access to Arabic-speaking crisis managers.
+                            </p>
+                            <ul class="text-xs space-y-2 opacity-100 font-bold drop-shadow-md">
+                                <li><i class="fas fa-balance-scale mr-2 text-sinopia drop-shadow-none"></i>Legal &
+                                    Disciplinary Support</li>
+                                <li><i class="fas fa-ambulance mr-2 text-sinopia drop-shadow-none"></i>Medical &
+                                    Psychiatric Emergencies</li>
+                                <li><i class="fas fa-globe-americas mr-2 text-sinopia drop-shadow-none"></i>Geopolitical
+                                    Evacuations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Academic Intervention -->
+                    <div class="feature-card glass-dark p-8 rounded-[2rem] lg:col-span-2 shadow-2xl card-3d relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/academic_intervention.png')] bg-cover bg-center mix-blend-overlay opacity-30">
+                        </div>
+                        <div class="relative z-10 flex flex-col md:flex-row gap-8">
+                            <div class="md:w-1/2">
+                                <i class="fas fa-chart-line text-3xl text-cyber mb-6 relative z-10 drop-shadow-md"></i>
+                                <h3 class="text-2xl font-philosopher font-bold mb-4 relative z-10 drop-shadow-md">
+                                    Academic Intervention</h3>
+                                <p
+                                    class="text-gray-200 text-sm leading-relaxed relative z-10 font-medium drop-shadow-lg">
+                                    Academic decline shows early signals. Our proactive framework catches at-risk
+                                    students before it's too late.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 flex flex-col justify-center space-y-4">
+                                <div
+                                    class="bg-red-500/20 border border-red-500/30 p-3 rounded-xl flex items-center shadow-lg backdrop-blur-sm">
+                                    <i
+                                        class="fas fa-exclamation-circle text-red-500 mx-2 text-lg hidden sm:block drop-shadow-md"></i><span
+                                        class="text-xs font-bold drop-shadow-md">Critical: Case management &
+                                        probation</span></div>
+                                <div
+                                    class="bg-yellow-500/20 border border-yellow-500/30 p-3 rounded-xl flex items-center shadow-lg backdrop-blur-sm">
+                                    <i
+                                        class="fas fa-exclamation-triangle text-yellow-500 mx-2 text-lg hidden sm:block drop-shadow-md"></i><span
+                                        class="text-xs font-bold drop-shadow-md">Moderate: Targeted recovery</span>
+                                </div>
+                                <div
+                                    class="bg-green-500/20 border border-green-500/30 p-3 rounded-xl flex items-center shadow-lg backdrop-blur-sm">
+                                    <i
+                                        class="fas fa-shield-alt text-green-500 mx-2 text-lg hidden sm:block drop-shadow-md"></i><span
+                                        class="text-xs font-bold drop-shadow-md">Preventive: Early warning &
+                                        monitoring</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Bento Grid -->
+                <div class="grid md:grid-cols-3 gap-6 mt-6">
+                    <div class="feature-card glass-dark p-8 rounded-[2rem] text-center card-3d border-t-2 border-t-viridian relative overflow-hidden group"
+                        data-aos="fade-up">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/family_involvement.png')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-users text-4xl text-viridian mb-4 drop-shadow-md"></i>
+                            <h4 class="font-bold text-lg mb-2 drop-shadow-md">Family Involvement</h4>
+                            <p class="text-sm font-medium text-gray-200 drop-shadow-md max-w-sm mx-auto">Structured
+                                bridge between student, university, and family. Arabic-speaking primary contact for
+                                keeping parents informed.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card glass-dark p-8 rounded-[2rem] text-center card-3d border-t-2 border-t-cyber relative overflow-hidden group"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/crisis_response.png')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-hand-holding-heart text-4xl text-cyber mb-4 drop-shadow-md"></i>
+                            <h4 class="font-bold text-lg mb-2 drop-shadow-md">No Student Left Behind</h4>
+                            <p class="text-xs text-gray-300 drop-shadow-md font-medium px-2">Dedicated case management
+                                for complex situations: SEN, behavioral intervention, disputes, and sensitive high-risk
+                                hurdles.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card glass-dark p-8 rounded-[2rem] text-center card-3d border-t-2 border-t-champagne relative overflow-hidden group"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="absolute inset-0 bg-[url('assets/post_return_coaching.png')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-user-tie text-4xl text-champagne mb-4 drop-shadow-md"></i>
+                            <h4
+                                class="font-bold text-lg mb-2 drop-shadow-md bg-black/30 backdrop-blur-sm inline-block px-4 py-1 rounded-full">
+                                Post-Return Coaching</h4>
+                            <p class="text-sm font-medium text-gray-200 drop-shadow-md max-w-sm mx-auto pt-2">Bridging
+                                western informality and UAE corporate expectations. First 90 days support and alumni
+                                networking for immediate productivity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The SELECT Difference (Metrics & Table) -->
+        <section class="py-24 bg-white dark:bg-slate-900 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <!-- Measurable Outcomes -->
+                <div class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-slate-800 rounded-[3rem] p-10 md:p-16 shadow-lg mb-20 gap-12"
+                    data-aos="fade-up">
+                    <div class="md:w-1/3 text-center">
+                        <div
+                            class="inline-block bg-white dark:bg-slate-700 p-8 rounded-full text-prussian shadow-2xl border-4 border-cyber mb-4 relative">
+                            <span class="absolute inset-0 border-2 border-viridian/30 rounded-full animate-ping"></span>
+                            <h2 class="text-5xl md:text-6xl font-black text-prussian dark:text-white font-outfit">
+                                95<span class="text-viridian">%+</span></h2>
+                        </div>
+                        <p class="font-bold text-sm uppercase tracking-widest text-prussian dark:text-white mt-4">
+                            Student Retention Rate</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400 mt-2">Across supported programmes</p>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-3xl font-philosopher font-bold text-prussian dark:text-white mb-6">Delivering
+                            Results</h3>
+                        <p class="text-gray-600 dark:text-slate-300 mb-6 font-light">The SELECT Lifecycle Model is a
+                            risk-management and performance strategy that continuously delivers measurable returns for
+                            sponsors.</p>
+                        <ul class="grid sm:grid-cols-2 gap-4 text-sm font-bold text-prussian dark:text-white">
+                            <li class="flex items-start"><i
+                                    class="fas fa-shield-alt text-viridian mt-1 mr-3 text-lg"></i> Early intervention
+                                prevents failure</li>
+                            <li class="flex items-start"><i class="fas fa-rocket text-viridian mt-1 mr-3 text-lg"></i>
+                                Faster time-to-employment</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-graduation-cap text-viridian mt-1 mr-3 text-lg"></i> Higher academic
+                                achievement</li>
+                            <li class="flex items-start"><i class="fas fa-medal text-viridian mt-1 mr-3 text-lg"></i>
+                                Enhanced sponsor reputation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white">The SELECT
+                        Difference</h2>
+                    <p class="text-gray-500 dark:text-slate-400 mt-4 max-w-2xl mx-auto px-4">Only SELECT provides a
+                        fully integrated, end-to-end lifecycle model designed perfectly for UAE students.</p>
+                </div>
+
+                <div class="md:hidden flex justify-end text-[10px] text-gray-400 mb-2 items-center"><i
+                        class="fas fa-arrows-alt-h mr-2"></i> Swipe to scroll</div>
+                <div class="overflow-x-auto pb-8" data-aos="fade-up">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="bg-prussian text-white">
+                                <th class="p-5 rounded-tl-2xl font-bold tracking-wider text-sm w-1/4">Feature</th>
+                                <th class="p-5 font-bold tracking-wider text-sm opacity-70 w-1/4">Traditional Agencies
+                                </th>
+                                <th class="p-5 font-bold tracking-wider text-sm opacity-70 w-1/4">University Welfare
+                                </th>
+                                <th class="p-5 font-bold tracking-wider text-sm bg-viridian rounded-tr-2xl w-1/4">SELECT
+                                    Lifecycle</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold">Focus</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Admitting the student</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">General population</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5">UAE student success & ROI</td>
+                            </tr>
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold">Support Duration</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Ends at enrolment</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Reactive (when issues arise)</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5">Proactive (Pre to employment)</td>
+                            </tr>
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold">Cultural Context</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Generic international</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Western-centric</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5">Deep UAE cultural intelligence
+                                </td>
+                            </tr>
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold">Language</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">English</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">English</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5">Arabic and English</td>
+                            </tr>
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold">Reporting</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">None</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Limited by privacy laws</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5">Structured termly reporting</td>
+                            </tr>
+                            <tr
+                                class="border-b border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-50 dark:bg-slate-800 transition">
+                                <td class="p-5 text-gray-800 dark:text-slate-100 font-bold rounded-bl-2xl">Crisis
+                                    Response</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">None</td>
+                                <td class="p-5 text-gray-500 dark:text-slate-400">Campus-bound</td>
+                                <td class="p-5 text-viridian font-bold bg-viridian/5 rounded-br-2xl">24/7 global &
+                                    family liaison</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partnership Models Setup -->
+        <section id="partnership" class="py-24 bg-slate-100 dark:bg-slate-950 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white">
+                        Partnership Models</h2>
+                    <p class="text-gray-600 dark:text-slate-300 mt-4 max-w-2xl mx-auto">Different organizations have
+                        different capabilities. Choose the flexible tier that suits your strategic approach.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Tier 3 -->
+                    <div class="glass-panel p-10 rounded-3xl text-center card-3d bg-white dark:bg-slate-900 shadow-xl flex flex-col h-full border-t-8 border-t-gray-300 dark:border-t-slate-600"
+                        data-aos="fade-up" data-aos-delay="0">
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-slate-400 mb-2">
+                            Tier 3</h4>
+                        <h3 class="text-2xl font-philosopher font-bold text-prussian dark:text-white mb-6">Bespoke
+                            Intervention</h3>
+                        <p class="text-sm text-gray-500 dark:text-slate-400 mb-8 flex-grow">
+                            On-demand support for specific challenges (crisis, recovery, special cases). Ideal for orgs
+                            with established teams requiring occasional Arabic-speaking triage.
+                        </p>
+                        <a href="#contact"
+                            class="block w-full py-4 rounded-full border-2 border-prussian text-prussian dark:text-white font-bold hover:bg-prussian hover:text-white transition-all text-sm uppercase tracking-wide">Enquire</a>
+                    </div>
+
+                    <!-- Tier 1 (Highlighted) -->
+                    <div class="glass-dark p-10 rounded-3xl text-center card-3d shadow-2xl flex flex-col h-full transform md:-translate-y-6 border-t-8 border-t-cyber relative z-10"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="absolute top-0 right-0 bg-cyber text-prussian dark:text-white text-xs font-black px-4 py-1 rounded-bl-xl uppercase tracking-widest">
+                            Recommended</div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-cyber mb-2 mt-4">Tier 1</h4>
+                        <h3 class="text-3xl font-philosopher font-bold text-white mb-6">Full Lifecycle</h3>
+                        <p class="text-sm text-gray-300 mb-8 flex-grow leading-relaxed">
+                            Complete end-to-end service, from psychometric screening to graduate placement. SELECT acts
+                            as the fully outsourced student management arm.
+                        </p>
+                        <a href="#contact"
+                            class="block w-full py-4 rounded-full bg-gradient-gold text-prussian font-bold hover:shadow-[0_0_20px_rgba(255,205,0,0.4)] transition-all text-sm uppercase tracking-wide">Partner
+                            Now</a>
+                    </div>
+
+                    <!-- Tier 2 -->
+                    <div class="glass-panel p-10 rounded-3xl text-center card-3d bg-white dark:bg-slate-900 shadow-xl flex flex-col h-full border-t-8 border-t-viridian"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-viridian mb-2">Tier 2</h4>
+                        <h3 class="text-2xl font-philosopher font-bold text-prussian dark:text-white mb-6">Core Pastoral
+                            & Academic</h3>
+                        <p class="text-sm text-gray-500 dark:text-slate-400 mb-8 flex-grow">
+                            Focused on Stages 3 to 6 while abroad. Ideal for sponsors handling selection and
+                            pre-departure, requiring robust in-country oversight.
+                        </p>
+                        <a href="#contact"
+                            class="block w-full py-4 rounded-full border-2 border-prussian text-prussian dark:text-white font-bold hover:bg-prussian hover:text-white transition-all text-sm uppercase tracking-wide">Enquire</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Additional Comprehensive Services Matrix -->
+        <section
+            class="py-24 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 relative z-10 transition-colors duration-500">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-viridian font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Expanded
+                        Capabilities</span>
+                    <h2 class="text-4xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">
+                        Comprehensive Student Support</h2>
+                    <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto font-light">
+                        Beyond the core lifecycle stages, SELECT provides specialised services ensuring every practical
+                        and strategic detail is managed with professionalism and care.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Scholarship Management -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-cyber" data-aos="fade-up">
+                        <i
+                            class="fas fa-award text-4xl text-cyber mb-6 border border-cyber/20 bg-cyber/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Scholarship
+                            Management</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Fully managed shortlisting and
+                            selection for high-quality intake. Transparent, merit-based selection guaranteeing only the
+                            most capable candidates proceed.</p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i
+                                    class="fas fa-bullhorn text-cyber mt-1 mr-3 w-4"></i>Campaign design and marketing
+                            </li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-clipboard-check text-cyber mt-1 mr-3 w-4"></i>Initial screening and
+                                verification</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-comments text-cyber mt-1 mr-3 w-4"></i>Interview facilitation</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-brain text-cyber mt-1 mr-3 w-4"></i>Psychometric and aptitude testing
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Admission Strategy -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-viridian" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <i
+                            class="fas fa-chess-knight text-4xl text-viridian mb-6 border border-viridian/20 bg-viridian/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Admission
+                            Strategy</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Strategic university selection aligned
+                            to UAE national workforce priorities. Maximizing return on investment by reviewing global
+                            university performance.</p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i
+                                    class="fas fa-chart-line text-viridian mt-1 mr-3 w-4"></i>Annual review of programme
+                                relevance</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-bullseye text-viridian mt-1 mr-3 w-4"></i>Alignment to priority UAE
+                                sectors</li>
+                        </ul>
+                    </div>
+
+                    <!-- Outsourced Academic Advising -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-champagne" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <i
+                            class="fas fa-user-graduate text-4xl text-champagne mb-6 border border-champagne/20 bg-champagne/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Academic
+                            Advising</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Continuous guidance and performance
+                            tracking across the globe for organisations that require on-the-ground academic oversight.
+                        </p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i
+                                    class="fas fa-chalkboard-teacher text-champagne mt-1 mr-3 w-4"></i>Professional
+                                structured oversight</li>
+                            <li class="flex items-start"><i class="fas fa-eye text-champagne mt-1 mr-3 w-4"></i>Full
+                                sponsor visibility of progress</li>
+                        </ul>
+                    </div>
+
+                    <!-- Summer & Winter Programmes -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-prussian dark:border-t-white"
+                        data-aos="fade-up">
+                        <i
+                            class="fas fa-sun text-4xl text-prussian dark:text-white mb-6 border border-prussian/20 dark:border-white/20 bg-prussian/5 dark:bg-white/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Summer &
+                            Winter Programmes</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Exposure, skill-building, and career
+                            direction for future-ready talent preparing for university or enhancing employability.</p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i
+                                    class="fas fa-university text-prussian dark:text-white mt-1 mr-3 w-4"></i>University-level
+                                learning experience</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-users-cog text-prussian dark:text-white mt-1 mr-3 w-4"></i>Leadership
+                                & communication workshops</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-globe-americas text-prussian dark:text-white mt-1 mr-3 w-4"></i>Fully
+                                chaperoned cultural excursions</li>
+                        </ul>
+                    </div>
+
+                    <!-- Financial Governance -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-cyber" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <i
+                            class="fas fa-file-invoice-dollar text-4xl text-cyber mb-6 border border-cyber/20 bg-cyber/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Financial
+                            Governance</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Protecting the sponsor's financial
+                            investment through structured oversight and guidance for stipend use.</p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i class="fas fa-wallet text-cyber mt-1 mr-3 w-4"></i>Stipend
+                                oversight & management</li>
+                            <li class="flex items-start"><i class="fas fa-coins text-cyber mt-1 mr-3 w-4"></i>Student
+                                financial literacy skill-building</li>
+                        </ul>
+                    </div>
+
+                    <!-- National Identity & Cultural Continuity -->
+                    <div class="glass-panel p-8 rounded-3xl card-3d border-t-4 border-t-viridian" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <i
+                            class="fas fa-mosque text-4xl text-viridian mb-6 border border-viridian/20 bg-viridian/5 p-4 rounded-2xl"></i>
+                        <h3 class="text-2xl font-bold font-philosopher text-prussian dark:text-white mb-4">Cultural
+                            Continuity</h3>
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-6">Keeping UAE students connected to
+                            their Emirati identity, Islamic values, and national vision while spending formative years
+                            in Western environments.</p>
+                        <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+                            <li class="flex items-start"><i
+                                    class="fas fa-hands-helping text-viridian mt-1 mr-3 w-4"></i>Combating cultural
+                                drift</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-landmark text-viridian mt-1 mr-3 w-4"></i>Preserving national values
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Annual Engagement Calendar Section -->
+        <section
+            class="py-24 bg-slate-50 dark:bg-slate-950 relative border-y border-gray-200 dark:border-slate-800 shadow-inner z-10 transition-colors duration-500">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span
+                        class="text-prussian dark:text-white font-bold tracking-[0.2em] uppercase text-sm mb-4 block">12-Month
+                        Guarantee</span>
+                    <h2 class="text-3xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">
+                        Full-Year Engagement Calendar</h2>
+                    <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto font-light">
+                        A structured annual calendar ensuring students remain connected, capable, and on track. We
+                        proactively schedule touchpoints preventing reliance on reactive support.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <!-- Block 1 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-cyber flex flex-col card-3d"
+                        data-aos="fade-up">
+                        <div class="text-xs font-black text-cyber uppercase mb-2">Jul - Aug</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Pre-Departure</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Briefings, visa
+                            support, and cultural preparation before the journey begins.</p>
+                    </div>
+                    <!-- Block 2 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-viridian flex flex-col card-3d"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-xs font-black text-viridian uppercase mb-2">Sep - Oct</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Arrival & Settling</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">On-the-ground
+                            orientation, university registration, and accommodation checks.</p>
+                    </div>
+                    <!-- Block 3 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-champagne flex flex-col card-3d"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-xs font-black text-champagne uppercase mb-2">Nov - Dec</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Term 1 Check-In</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Academic progress
+                            reviews, wellbeing assessments, and winter break planning.</p>
+                    </div>
+                    <!-- Block 4 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-sinopia flex flex-col card-3d"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-xs font-black text-sinopia uppercase mb-2">Jan - Feb</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Mid-Year Review</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Exam results
+                            analysis, course correction, and summer internship applications.</p>
+                    </div>
+                    <!-- Block 5 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-cyber flex flex-col card-3d"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-xs font-black text-cyber uppercase mb-2">Mar - Apr</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Term 2 & Spring</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Continued academic
+                            monitoring, mental health check-ins, and career coaching.</p>
+                    </div>
+                    <!-- Block 6 -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-viridian flex flex-col card-3d"
+                        data-aos="fade-up" data-aos-delay="500">
+                        <div class="text-xs font-black text-viridian uppercase mb-2">May - Jun</div>
+                        <h4 class="font-bold text-prussian dark:text-white mb-3">Year-End Prep</h4>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Final exam support,
+                            housing transition, and preparation for next year or graduation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA & Contact Section -->
+        <section id="contact" class="py-32 select-mesh-bg relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('assets/emirati_student_success.png')] bg-cover bg-center opacity-10">
+            </div>
+            <div class="max-w-4xl mx-auto px-6 relative z-10 text-center" data-aos="zoom-in">
+                <i class="fas fa-handshake text-6xl text-cyber mb-8 block"></i>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-philosopher text-white mb-8">Every UAE
+                    student deserves a journey that is supported, safe, and successful.</h2>
+                <p class="text-xl text-gray-300 mb-12 font-light">
+                    Partner with SELECT to protect your investment and empower your students to become the future
+                    leaders of the UAE workforce.
+                </p>
+                <div
+                    class="bg-white/10 dark:bg-slate-800/50 backdrop-blur-md p-10 rounded-[3rem] border border-white/20 inline-block w-full max-w-2xl">
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-white mb-8">
+                        <div class="flex items-center"><i class="fas fa-envelope text-cyber text-2xl mr-4"></i>
+                            peopleservices@selectgroup.ae</div>
+                        <div class="flex items-center"><i class="fas fa-globe text-cyber text-2xl mr-4"></i>
+                            www.selectgroup.ae</div>
+                    </div>
+                    <a href="mailto:peopleservices@selectgroup.ae"
+                        class="block w-full bg-white text-prussian font-black py-5 rounded-2xl hover:bg-gray-200 transition-all shadow-xl uppercase tracking-widest text-sm hover:-translate-y-1">Contact
+                        Our Team</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="bg-gray-950 text-gray-400 pt-16 pb-8 border-t-4 border-cyber">
+        <div
+            class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 border-b border-gray-800 pb-12">
+            <div data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-center gap-3 mb-8">
+                    <img src="assets/logo.png" alt="SELECT Logo" class="company-logo logo-on-dark px-0">
+                </div>
+                <p class="text-xs leading-loose mb-6">UAE-based specialised lifecycle management organisation.<br />P.O.
+                    Box 44705, Abu Dhabi, UAE.</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Solutions</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#model" class="hover:text-cyber transition">Lifecycle Model</a></li>
+                    <li><a href="#services" class="hover:text-cyber transition">Specialised Services</a></li>
+                    <li><a href="#partnership" class="hover:text-cyber transition">Partnership Models</a></li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Company</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#about" class="hover:text-cyber transition">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-cyber transition">Contact</a></li>
+                </ul>
+
+                <h4 class="font-bold text-white mb-6 mt-10 uppercase tracking-widest text-xs">Connect With Us</h4>
+                <div class="flex flex-wrap gap-4">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/SelectTrainingLLC/" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 hover:bg-[#1877F2] hover:text-white flex items-center justify-center transition-all shadow-lg hover:-translate-y-1"
+                        aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-lg"></i>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/company/selecttrainingae/" target="_blank"
+                        rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 hover:bg-[#0A66C2] hover:text-white flex items-center justify-center transition-all shadow-lg hover:-translate-y-1"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/c/SELECTTrainingLLC" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 hover:bg-[#FF0000] hover:text-white flex items-center justify-center transition-all shadow-lg hover:-translate-y-1"
+                        aria-label="YouTube">
+                        <i class="fab fa-youtube text-lg"></i>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/selecttrainingllc/" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white flex items-center justify-center transition-all shadow-lg hover:-translate-y-1"
+                        aria-label="Instagram">
+                        <i class="fab fa-instagram text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Feedback & Enquiries</h4>
+                <p class="text-xs mb-6 text-gray-300 font-medium">Your feedback is important to us. Please scan the QR
+                    code to evaluate our services.</p>
+                <div class="group flex flex-col sm:flex-row items-center gap-6 bg-white/5 dark:bg-slate-900/40 backdrop-blur-md p-5 rounded-[2rem] border border-white/10 hover:border-cyber/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyber/5">
+                    <div class="relative flex-shrink-0">
+                        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-500">
+                            <i class="fas fa-qrcode text-3xl text-prussian"></i>
+                        </div>
+                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-cyber rounded-full animate-ping"></div>
+                    </div>
+                    <div class="flex-1 text-center sm:text-left">
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-gray-400 mb-2">Speak to our experts</p>
+                        <a href="mailto:hello@selectgroup.ae"
+                            class="font-outfit text-white hover:text-cyber font-extrabold tracking-wide text-base flex items-center justify-center sm:justify-start transition-colors break-all">
+                            <i class="fas fa-envelope-open-text mr-3 text-cyber"></i>
+                            hello@selectgroup.ae
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-xs text-center text-gray-600 pb-8 tracking-wide">© 2026 Select Training and Management
+            Consultancy LLC | Setting the standard in premium student support.</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 40, easing: 'ease-out-cubic' });
+
+        // Header Scroll Effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            const scrollPercent = Math.min(window.scrollY / 100, 1);
+            
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-lg');
+                const rgb = isDark ? '11, 17, 32' : '255, 255, 255';
+                const alpha = 0.9 + (scrollPercent * 0.05);
+                header.style.backgroundColor = `rgba(${rgb}, ${alpha})`;
+                header.style.backdropFilter = 'blur(16px)';
+            } else {
+                header.classList.remove('shadow-lg');
+                header.style.backgroundColor = '';
+                header.style.backdropFilter = '';
+            }
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const menuLinks = overlay.querySelectorAll('a');
+
+        if (menuBtn && overlay) {
+            menuBtn.addEventListener('click', () => overlay.classList.remove('translate-x-full'));
+            closeBtn.addEventListener('click', () => overlay.classList.add('translate-x-full'));
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.add('translate-x-full');
+            });
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => overlay.classList.add('translate-x-full'));
+            });
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+        }
+        
+        const btn = document.getElementById('theme-toggle');
+        const btnM = document.getElementById('theme-toggle-mobile');
+        if (btn) btn.addEventListener('click', toggleTheme);
+        if (btnM) btnM.addEventListener('click', toggleTheme);
+
+        // Smooth Scroll with Offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
