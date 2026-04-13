@@ -1349,76 +1349,234 @@
             </div>
         </section>
 
-        <!-- Annual Engagement Calendar Section -->
-        <section
-            class="py-16 md:py-24 bg-slate-50 dark:bg-slate-950 relative border-y border-gray-200 dark:border-slate-800 shadow-inner z-10 transition-colors duration-500">
-            <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
-                    <span
-                        class="text-prussian dark:text-white font-bold tracking-[0.2em] uppercase text-sm mb-4 block">12-Month
-                        Guarantee</span>
-                    <h2
-                        class="text-2xl sm:text-3xl md:text-5xl font-bold font-philosopher text-prussian dark:text-white mb-6">
-                        Full-Year Engagement Calendar</h2>
-                    <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto font-light">
-                        A structured annual calendar ensuring students remain connected, capable, and on track. We
-                        proactively schedule touchpoints preventing reliance on reactive support.
-                    </p>
-                </div>
+ <section class="py-16 md:py-28 bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden relative">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+        <div id="glow-1" class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-cyber rounded-full blur-[120px] transition-all duration-1000"></div>
+        <div id="glow-2" class="absolute top-[60%] -right-[5%] w-[30%] h-[30%] bg-viridian rounded-full blur-[100px] transition-all duration-1000"></div>
+    </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <!-- Block 1 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-cyber flex flex-col card-3d"
-                        data-aos="fade-up">
-                        <div class="text-xs font-black text-cyber uppercase mb-2">Jul - Aug</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Pre-Departure</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Briefings, visa
-                            support, and cultural preparation before the journey begins.</p>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8" data-aos="fade-up">
+            <div class="max-w-2xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="h-[2px] w-8 bg-cyber"></span>
+                    <span class="text-cyber font-black tracking-[0.3em] uppercase text-xs">The 12-Month Commitment</span>
+                </div>
+                <h2 class="text-4xl md:text-7xl font-bold font-philosopher text-prussian dark:text-white leading-tight">
+                    Engagement <br class="hidden md:block"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber to-viridian">Milestones</span>
+                </h2>
+            </div>
+            <div class="max-w-sm md:text-right">
+                <p class="text-gray-500 dark:text-slate-400 text-sm leading-relaxed italic">
+                    "Proactive support isn't just a promise; it's a scheduled reality."
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            <div class="lg:col-span-4 order-2 lg:order-1">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-3">
+                    <button onclick="stackNavigate(0)" class="nav-tile active-tile group" id="btn-0">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">01</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">JUL - AUG</span>
+                    </button>
+                    <button onclick="stackNavigate(1)" class="nav-tile group" id="btn-1">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">02</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">SEP - OCT</span>
+                    </button>
+                    <button onclick="stackNavigate(2)" class="nav-tile group" id="btn-2">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">03</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">NOV - DEC</span>
+                    </button>
+                    <button onclick="stackNavigate(3)" class="nav-tile group" id="btn-3">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">04</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">JAN - FEB</span>
+                    </button>
+                    <button onclick="stackNavigate(4)" class="nav-tile group" id="btn-4">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">05</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">MAR - APR</span>
+                    </button>
+                    <button onclick="stackNavigate(5)" class="nav-tile group" id="btn-5">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="tile-num">06</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyber">→</span>
+                        </div>
+                        <span class="tile-month">MAY - JUN</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8 order-1 lg:order-2 relative perspective-1000">
+                <div id="calendar-card" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[3rem] shadow-2xl border border-white/20 dark:border-slate-800 p-8 md:p-16 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform overflow-hidden relative">
+                    
+                    <div id="bg-icon" class="absolute -bottom-10 -right-10 text-[15rem] opacity-[0.03] dark:opacity-[0.05] pointer-events-none transition-all duration-1000">
+                        ✈️
                     </div>
-                    <!-- Block 2 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-viridian flex flex-col card-3d"
-                        data-aos="fade-up" data-aos-delay="100">
-                        <div class="text-xs font-black text-viridian uppercase mb-2">Sep - Oct</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Arrival & Settling</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">On-the-ground
-                            orientation, university registration, and accommodation checks.</p>
+
+                    <div class="flex items-center justify-between mb-12">
+                        <div class="flex items-center gap-5">
+                            <div id="phase-badge" class="h-14 w-14 rounded-2xl bg-cyber shadow-lg shadow-cyber/30 flex items-center justify-center text-white text-xl font-bold transition-colors duration-500">1</div>
+                            <div>
+                                <h3 id="display-month" class="text-sm font-black tracking-[0.2em] text-gray-400 uppercase mb-1">July - August</h3>
+                                <div class="flex gap-1" id="phase-dots">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block">
+                            <span class="px-4 py-2 rounded-full border border-gray-100 dark:border-slate-800 text-[10px] font-bold dark:text-slate-400">SESSION 2026/27</span>
+                        </div>
                     </div>
-                    <!-- Block 3 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-champagne flex flex-col card-3d"
-                        data-aos="fade-up" data-aos-delay="200">
-                        <div class="text-xs font-black text-champagne uppercase mb-2">Nov - Dec</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Term 1 Check-In</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Academic progress
-                            reviews, wellbeing assessments, and winter break planning.</p>
-                    </div>
-                    <!-- Block 4 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-sinopia flex flex-col card-3d"
-                        data-aos="fade-up" data-aos-delay="300">
-                        <div class="text-xs font-black text-sinopia uppercase mb-2">Jan - Feb</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Mid-Year Review</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Exam results
-                            analysis, course correction, and summer internship applications.</p>
-                    </div>
-                    <!-- Block 5 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-cyber flex flex-col card-3d"
-                        data-aos="fade-up" data-aos-delay="400">
-                        <div class="text-xs font-black text-cyber uppercase mb-2">Mar - Apr</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Term 2 & Spring</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Continued academic
-                            monitoring, mental health check-ins, and career coaching.</p>
-                    </div>
-                    <!-- Block 6 -->
-                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-viridian flex flex-col card-3d"
-                        data-aos="fade-up" data-aos-delay="500">
-                        <div class="text-xs font-black text-viridian uppercase mb-2">May - Jun</div>
-                        <h4 class="font-bold text-prussian dark:text-white mb-3">Year-End Prep</h4>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 leading-relaxed mt-auto">Final exam support,
-                            housing transition, and preparation for next year or graduation.</p>
+
+                    <div class="grid md:grid-cols-2 gap-12 relative z-10">
+                        <div class="space-y-6">
+                            <h4 id="display-title" class="text-4xl md:text-5xl font-bold text-prussian dark:text-white leading-tight">Pre-Departure</h4>
+                            <p id="display-desc" class="text-lg text-gray-600 dark:text-slate-400 leading-relaxed font-light">
+                                Comprehensive briefings and visa support ensuring a smooth transition before your journey begins.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-col justify-between gap-8">
+                            <div id="deliverable-box" class="bg-slate-50 dark:bg-slate-800/40 p-8 rounded-[2rem] border-l-8 border-cyber transition-all duration-500">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-2 h-2 rounded-full bg-cyber"></span>
+                                    <span class="text-[10px] font-black uppercase text-cyber tracking-widest">Priority Outcome</span>
+                                </div>
+                                <p id="display-extra" class="text-base font-bold text-prussian dark:text-slate-200 uppercase leading-tight">Visa & Travel Clearance Check</p>
+                            </div>
+
+                            <div class="flex items-center gap-4 group cursor-help">
+                                <div class="flex -space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyber to-blue-500 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[10px] text-white font-bold">CM</div>
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-viridian to-green-500 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[10px] text-white font-bold">ST</div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-prussian dark:text-slate-300">Dedicated Support</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-tighter">Case Manager + Tech Team</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
+<style>
+    .perspective-1000 { perspective: 1200px; }
+    
+    .nav-tile {
+        @apply flex flex-col items-start p-5 md:p-7 rounded-[1.5rem] transition-all duration-500 border border-transparent text-left relative overflow-hidden;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    .dark .nav-tile { background: rgba(15, 23, 42, 0.4); }
+
+    .nav-tile:hover {
+        @apply border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 transform -translate-y-1;
+    }
+
+    .active-tile {
+        @apply bg-white dark:bg-slate-900 border-cyber/30 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] scale-[1.03] z-20;
+        border-left: 4px solid theme('colors.cyber');
+    }
+
+    .tile-num {
+        @apply text-[10px] font-black text-gray-400 dark:text-slate-600 mb-2 transition-colors duration-500;
+    }
+
+    .active-tile .tile-num { @apply text-cyber; }
+
+    .tile-month {
+        @apply font-bold text-prussian dark:text-slate-400 transition-colors duration-500;
+    }
+
+    .active-tile .tile-month { @apply text-prussian dark:text-white; }
+
+    .dot {
+        @apply w-1.5 h-1.5 rounded-full bg-gray-200 dark:bg-slate-800 transition-all duration-500;
+    }
+    .dot-active {
+        @apply w-6 bg-cyber;
+    }
+</style>
+
+<script>
+    const phases = [
+        { month: "Jul - Aug", title: "Pre-Departure", desc: "Before you fly, we handle the heavy lifting. Briefings, visa support, and cultural prep to ensure you land with confidence.", deliverable: "Visa & Travel Clearance Check", badge: "1", color: "#00E5FF", icon: "✈️" },
+        { month: "Sep - Oct", title: "Arrival & Setup", desc: "The first 60 days are vital. We coordinate university registration, local banking, and accommodation safety audits.", deliverable: "Residential Safety Audit", badge: "2", color: "#00D1B2", icon: "🏠" },
+        { month: "Nov - Dec", title: "Term 1 Check-In", desc: "Mid-term performance reviews and wellbeing assessments to ensure you're thriving in your new environment.", deliverable: "Mental Health & Progress Review", badge: "3", color: "#F7E7CE", icon: "📚" },
+        { month: "Jan - Feb", title: "Mid-Year Review", desc: "Analysing first-term results and pivoting strategies for summer internship applications and academic growth.", deliverable: "Academic Performance Audit", badge: "4", color: "#CB4154", icon: "📈" },
+        { month: "Mar - Apr", title: "Term 2 & Spring", desc: "Advanced career coaching sessions and continued monitoring as curriculum intensity increases.", deliverable: "Career Path Mapping Session", badge: "5", color: "#6A5ACD", icon: "🌱" },
+        { month: "May - Jun", title: "Year-End Prep", desc: "Final exam support and housing transitions. We prepare you for the next academic year or your transition to graduation.", deliverable: "Annual Summary & Transition Plan", badge: "6", color: "#FFD700", icon: "🎓" }
+    ];
+
+    // Initialize dots
+    const dotsContainer = document.getElementById('phase-dots');
+    phases.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = `dot ${i === 0 ? 'dot-active' : ''}`;
+        d.id = `dot-${i}`;
+        dotsContainer.appendChild(d);
+    });
+
+    function stackNavigate(index) {
+        const card = document.getElementById('calendar-card');
+        const badge = document.getElementById('phase-badge');
+        const delBox = document.getElementById('deliverable-box');
+        const bgIcon = document.getElementById('bg-icon');
+        const glow1 = document.getElementById('glow-1');
+
+        // Nav UI Updates
+        document.querySelectorAll('.nav-tile').forEach(t => t.classList.remove('active-tile'));
+        document.getElementById(`btn-${index}`).classList.add('active-tile');
+        
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            if(i === index) d.classList.add('dot-active');
+            else d.classList.remove('dot-active');
+        });
+
+        // Animation Entrance
+        card.style.transform = "scale(0.98) translateY(10px)";
+        card.style.opacity = "0.7";
+
+        setTimeout(() => {
+            const data = phases[index];
+            document.getElementById('display-month').innerText = data.month;
+            document.getElementById('display-title').innerText = data.title;
+            document.getElementById('display-desc').innerText = data.desc;
+            document.getElementById('display-extra').innerText = data.deliverable;
+            badge.innerText = data.badge;
+            bgIcon.innerText = data.icon;
+
+            // Theme switching
+            badge.style.backgroundColor = data.color;
+            badge.style.boxShadow = `0 10px 25px -5px ${data.color}60`;
+            delBox.style.borderLeftColor = data.color;
+            glow1.style.backgroundColor = data.color;
+
+            // Exit Animation
+            card.style.transform = "scale(1) translateY(0)";
+            card.style.opacity = "1";
+        }, 300);
+    }
+</script>
         <!-- CTA & Contact Section -->
         <section id="contact" class="py-16 md:py-32 select-mesh-bg relative overflow-hidden">
             <div class="absolute inset-0 bg-[url('assets/emirati_student_success.png')] bg-cover bg-center opacity-10">
